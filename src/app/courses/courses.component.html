@@ -1,8 +1,13 @@
 <h2>Courses at Edureka</h2>
 
 <ul class="courses">
-<li><span class="badge">{{course.id}}</span>
+    <li *ngFor= "let course of Courses"
+    [class.selected]="course=== coursesedCourse"
+    (click)="onSelect(course)">
+</li>    
+<span class="badge">{{course.id}}</span>
 {{course.name}}
 </li>
-
 </ul>
+<app-course-detail [course]="course"></app-course-detail>
+

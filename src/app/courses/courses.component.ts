@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
 import {Course} from '../course';
 import {COURSES} from './../mock-course';
+import {CourseService} from './../course.service';
 
 @Component({
   selector: 'app-courses',
@@ -9,18 +10,23 @@ import {COURSES} from './../mock-course';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
-
-  courses = COURSES;
   selectedCourse:Course;
+  courses : Course[];
+ 
 
-  constructor() {
+  constructor(private CourseService:CourseService)   {
     
    }
  
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getCourses();
   }
 
   onSelect(course : Course):void{
     this.selectedCourse = course;
   }
+getCourses():void{
+  this.CourseService.getCourses().subscribe(courses=>this.courses=courses)
+}
+
 }
